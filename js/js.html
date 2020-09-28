@@ -1,0 +1,51 @@
+< html>
+    < head>
+        < meta http - equiv="Content-Type" content="text/html; charset=utf-8">
+            < script type="text/javascript">
+                x = new Array();
+                y = new Array();
+                x[0] = 100;
+                y[0] = 100;
+                x[1] = 300;
+                y[1] = 200;
+                var kakudo_0 = 0;
+                var kakudo_1 = 0;
+                // 開v始モジュール
+                function start() {
+                canvas = document.getElementById('canvas_e');
+                ctx = canvas.getContext('2d'); // キャンバスからコンテキストを取得
+                img = new Array();
+                img[0] = new Image();
+                img[0].src = "neko2_03.gif";
+                img[1] = new Image();
+                img[1].src = "neko02.gif";
+                timerID = setInterval('draw()', 33);
+                }
+                // 描画モジュール
+                function draw() {
+                ctx.clearRect(0, 0, 600, 400);
+                //今の状態を保存する
+                ctx.save();
+                ctx.translate(x[0] + 60, y[0] + 50);
+                ctx.rotate(kakudo_0 / 180 * Math.PI);
+                ctx.translate(-x[0] - 60, -y[0] - 50);
+                ctx.drawImage(img[0], x[0], y[0]);
+                ctx.restore();
+                //状態を戻す
+                ctx.save();
+                ctx.translate(x[1] + 30, y[1] + 41);
+                ctx.rotate(-kakudo_1 / 180 * Math.PI);
+                ctx.translate(-x[1] - 30, -y[1] - 41);
+                ctx.drawImage(img[1], x[1], y[1]);
+                ctx.restore();
+                kakudo_0 += 5;
+                if (kakudo_0 == 360) {
+                kakudo_0 = 0;
+                }
+                kakudo_1 += 10;
+                if (kakudo_1 == 360) {
+                kakudo_1 = 0;
+                }
+                } < /script> < /head> < body onload="start()">
+                    < canvas id="canvas_e" style="background-color:lightgreen;" width="600" height="400" />
+                        < /body> < /html>
